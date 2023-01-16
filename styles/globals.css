@@ -14,5 +14,17 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Quicksand";
-    color: #333;
+}
+
+ul {
+    list-style: none;
+}
+
+.page_title {
+    margin-left: 2rem;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
 }
