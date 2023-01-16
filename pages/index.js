@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   return (
     <div>
-      <h2>Home page</h2>
+      <h2>The Home page</h2>
     </div>
   );
 }
