@@ -13,7 +13,6 @@ export default function Home() {
 
   return (
     <div>
-      <h2 className="page_title">The Home page</h2>
       <EventList items={FeaturedEvents} />
     </div>
   );
