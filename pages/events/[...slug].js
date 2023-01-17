@@ -8,13 +8,14 @@ import { Spinner } from "@chakra-ui/react";
 
 //importing function
 import { getFilteredEvents } from "../../dummy-data-js";
+import EventList from "../../components/events/EventList";
 
 const FilteredEvents = () => {
   const router = useRouter();
 
   const filterData = router.query.slug;
 
-  console.log(filterData);
+  //console.log(filterData);
 
   if (!filterData) {
     return (
@@ -50,7 +51,7 @@ const FilteredEvents = () => {
 
   const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
 
-  console.log(filteredEvents);
+  //console.log(filteredEvents);
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <p>
@@ -62,7 +63,7 @@ const FilteredEvents = () => {
 
   return (
     <div>
-      <h3> Filtered Events</h3>
+      <EventList items={filteredEvents} />
     </div>
   );
 };
