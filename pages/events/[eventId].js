@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 //function to get filtered event
 import { getEventById } from "../../dummy-data-js";
+import DetailedEvent from "../../components/events/DetailedEvent";
 
 const EventDetailPage = () => {
   const router = useRouter();
@@ -13,18 +14,17 @@ const EventDetailPage = () => {
 
   const eventId = router.query.eventId;
 
-  const detailedEvent = getEventById(eventId);
+  const event = getEventById(eventId);
 
-  console.log(detailedEvent);
+  console.log(event);
 
-  const { title, image, date, location, id, description } = detailedEvent;
+  const { title, image, date, location, id, description } = event;
 
-  return (
-    <div>
-      <h3> {title}</h3>
-      <p>{date}</p>
-    </div>
-  );
+  if (!event) {
+    return <div> no event found</div>;
+  }
+
+  return <DetailedEvent {...event} />;
 };
 
 export default EventDetailPage;

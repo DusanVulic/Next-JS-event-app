@@ -1,0 +1,27 @@
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 10px 10px 26px -12px rgba(0, 0, 0, 0.46);
+    padding: 20px;
+}
+
+.container h3 {
+    margin-bottom: 0.5rem;
+}
+
+.container p {
+    margin-bottom: 0.5rem;
+}
+
+.container img {
+    width: 100%;
+    object-fit: cover;
+    height: 10rem;
+    margin-bottom: 0.5rem;
+}
+
+.actions {
+    width: 200px;
+    margin: 4rem auto;
+}
