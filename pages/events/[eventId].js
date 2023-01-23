@@ -13,7 +13,7 @@ import DetailedEvent from "../../components/events/DetailedEvent";
 const EventDetailPage = (props) => {
   const event = props.selectedEvent;
 
-  console.log(event);
+  //console.log(event);
 
   //const { title, image, date, location, id, description } = event;
 

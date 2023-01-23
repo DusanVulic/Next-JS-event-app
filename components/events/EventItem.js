@@ -21,11 +21,11 @@ const EventItem = (props) => {
     year: "numeric",
   });
 
-  //const formattedAddress = location.replace(",","\n");
+  const formattedAddress = location.replace(",", "\n");
 
   const exploreLink = `/events/${id}`;
 
-  console.log(location);
+ // console.log(location);
 
   return (
     <li className={styles.item}>
@@ -39,7 +39,7 @@ const EventItem = (props) => {
           </div>
           <div className={styles.address}>
             <AddressIcon />
-            <address>{location}</address>
+            <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={styles.actions}>

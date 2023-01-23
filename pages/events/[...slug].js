@@ -6,11 +6,13 @@ import { useRouter } from "next/router";
 //importing spinner from chakra
 import { Spinner } from "@chakra-ui/react";
 
+// import button from ui component folder
+import Button from "../../components/ui/Button";
 //importing function
-import { getFilteredEvents } from "../../dummy-data-js";
+import { getFilteredEvents } from "../../helpers/api-util";
 import EventList from "../../components/events/EventList";
 
-const FilteredEvents = () => {
+const FilteredEvents = (props) => {
   const router = useRouter();
 
   const filterData = router.query.slug;
@@ -32,6 +34,48 @@ const FilteredEvents = () => {
     );
   }
 
+  // const filteredYear = filterData[0];
+  // const filteredMonth = filterData[1];
+
+  // const numYear = +filteredYear;
+  // const numMonth = +filteredMonth;
+
+  if (props.hasError) {
+    return (
+      <div>
+        <p>invalid filter,please adjust your search values </p>;
+        <Button link={"/events"}>go back to all events page </Button>
+      </div>
+    );
+  }
+
+  const filteredEvents = props.events;
+
+  //console.log(filteredEvents);
+  if (!filteredEvents || filteredEvents.length === 0) {
+    return (
+      <div>
+        <p>
+          no events found for that search criteria, please adjust your search
+          values{" "}
+        </p>
+        <Button link={"/events"}>go back to all events page </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <EventList items={filteredEvents} />
+    </div>
+  );
+};
+
+export const getServerSideProps = async (context) => {
+  const { params } = context;
+
+  const filterData = params.slug;
+
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
 
@@ -46,26 +90,23 @@ const FilteredEvents = () => {
     numMonth < 1 ||
     numMonth > 12
   ) {
-    return <p>invalid filter,please adjust your search values </p>;
+    return {
+      props: {
+        hasError: true,
+      },
+    };
   }
 
-  const filteredEvents = getFilteredEvents({ year: numYear, month: numMonth });
+  const filteredEvents = await getFilteredEvents({
+    year: numYear,
+    month: numMonth,
+  });
 
-  //console.log(filteredEvents);
-  if (!filteredEvents || filteredEvents.length === 0) {
-    return (
-      <p>
-        no events found for that search criteria, please adjust your search
-        values{" "}
-      </p>
-    );
-  }
-
-  return (
-    <div>
-      <EventList items={filteredEvents} />
-    </div>
-  );
+  return {
+    props: {
+      events: filteredEvents,
+    },
+  };
 };
 
 export default FilteredEvents;

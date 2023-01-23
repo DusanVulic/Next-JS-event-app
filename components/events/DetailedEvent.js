@@ -12,7 +12,7 @@ const DetailedEvent = ({ title, image, date, location, id, description }) => {
     year: "numeric",
   });
 
-  //const formattedAddress = location.replace(", ", "\n");
+  const formattedAddress = location.replace(", ", "\n");
 
   return (
     <>
@@ -20,7 +20,7 @@ const DetailedEvent = ({ title, image, date, location, id, description }) => {
         <h3>{title}</h3>
         <p>{readableDate} </p>
         <img src={"/" + image} alt={title} />
-        <p> {location}</p>
+        <p> {formattedAddress}</p>
         <p>{description}</p>
       </div>
       <div className={styles.actions}>
