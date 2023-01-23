@@ -7,7 +7,7 @@ import React from "react";
 import { Spinner } from "@chakra-ui/react";
 
 //function to get filtered event
-import { getEventById, getAllEvents } from "../../helpers/api-util";
+import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import DetailedEvent from "../../components/events/DetailedEvent";
 
 const EventDetailPage = (props) => {
@@ -49,12 +49,12 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
 
   const paths = events.map((event) => ({ params: { eventId: event.id } }));
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 export default EventDetailPage;
