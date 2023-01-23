@@ -39,7 +39,7 @@ const EventItem = (props) => {
           </div>
           <div className={styles.address}>
             <AddressIcon />
-            {location && <address>some location</address>}
+            <address>{location}</address>
           </div>
         </div>
         <div className={styles.actions}>
