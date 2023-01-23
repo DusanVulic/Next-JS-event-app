@@ -1,23 +1,17 @@
 import React from "react";
 
 // importing use router fron next
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 
 //importing spinner from chakra
 import { Spinner } from "@chakra-ui/react";
 
 //function to get filtered event
-import { getEventById } from "../../dummy-data-js";
+import { getEventById, getAllEvents } from "../../helpers/api-util";
 import DetailedEvent from "../../components/events/DetailedEvent";
 
-const EventDetailPage = () => {
-  const router = useRouter();
-
-  console.log(router.query);
-
-  const eventId = router.query.eventId;
-
-  const event = getEventById(eventId);
+const EventDetailPage = (props) => {
+  const event = props.selectedEvent;
 
   console.log(event);
 
@@ -41,4 +35,25 @@ const EventDetailPage = () => {
   return <DetailedEvent {...event} />;
 };
 
+export const getStaticProps = async (context) => {
+  const eventId = context.params.eventId;
+
+  const event = await getEventById(eventId);
+
+  return {
+    props: {
+      selectedEvent: event,
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const events = await getAllEvents();
+
+  const paths = events.map((event) => ({ params: { eventId: event.id } }));
+  return {
+    paths: paths,
+    fallback: false,
+  };
+};
 export default EventDetailPage;
