@@ -8,8 +8,11 @@ import EventList from "./../../components/events/EventList";
 import EventsSearch from "../../components/events/EventsSearch";
 
 ///import router to programmatically navigate
-
 import { useRouter } from "next/router";
+
+//importing Head
+
+import Head from "next/head";
 
 const EventsPage = (props) => {
   const router = useRouter();
@@ -22,6 +25,13 @@ const EventsPage = (props) => {
 
   return (
     <div>
+      <Head>
+        <title> Next js All events </title>
+        <meta
+          name="description"
+          content="find a lot events that allow you to evelve as developer....."
+        />
+      </Head>
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={events} />
     </div>
