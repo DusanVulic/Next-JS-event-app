@@ -12,12 +12,15 @@ import Button from "../../components/ui/Button";
 import { getFilteredEvents } from "../../helpers/api-util";
 import EventList from "../../components/events/EventList";
 
+///importing HEAD
+import Head from "next/head";
+
 const FilteredEvents = (props) => {
   const router = useRouter();
 
   const filterData = router.query.slug;
 
-  //console.log(filterData);
+  console.log(filterData);
 
   if (!filterData) {
     return (
@@ -66,6 +69,14 @@ const FilteredEvents = (props) => {
 
   return (
     <div>
+      <Head>
+        <title>Filtered events </title>
+        <meta
+          name="description"
+          content={`all events for ${filterData[1]} / ${filterData[0]}`}
+        />
+      </Head>
+
       <EventList items={filteredEvents} />
     </div>
   );

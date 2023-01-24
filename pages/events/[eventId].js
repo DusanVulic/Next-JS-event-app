@@ -10,6 +10,10 @@ import { Spinner } from "@chakra-ui/react";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import DetailedEvent from "../../components/events/DetailedEvent";
 
+///import head for metadata
+
+import Head from "next/head";
+
 const EventDetailPage = (props) => {
   const event = props.selectedEvent;
 
@@ -32,7 +36,15 @@ const EventDetailPage = (props) => {
     );
   }
 
-  return <DetailedEvent {...event} />;
+  return (
+    <>
+      <Head>
+        <title>{event.title} </title>
+        <meta name="description" content={event.description} />
+      </Head>
+      <DetailedEvent {...event} />;
+    </>
+  );
 };
 
 export const getStaticProps = async (context) => {
