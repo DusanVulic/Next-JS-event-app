@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Button from "../ui/Button";
 
@@ -19,7 +20,8 @@ const DetailedEvent = ({ title, image, date, location, id, description }) => {
       <div className={styles.container}>
         <h3>{title}</h3>
         <p>{readableDate} </p>
-        <img src={"/" + image} alt={title} />
+        <Image src={"/" + image} alt={title} width={500} height={500} />
+
         <p> {formattedAddress}</p>
         <p>{description}</p>
       </div>
